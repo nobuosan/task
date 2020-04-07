@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: %i(edit update)
+  before_action :set_list, only: %i(edit update destroy)
   def new
     @list = List.new
   end
@@ -12,6 +12,7 @@ class ListsController < ApplicationController
       render action: :new
     end
   end
+
   def update
     if @list.update_attributes(list_params)
       redirect_to :root
@@ -19,8 +20,14 @@ class ListsController < ApplicationController
       render action: :edit
     end
   end
+
   def edit
 
+  end
+
+  def destroy
+    @list.destroy
+    redirect_to :root
   end
 
   private
